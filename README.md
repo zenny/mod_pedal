@@ -3,8 +3,11 @@ Code for an Arduino to interface with foot pedals (or similar) in order to produ
 
 # Building
 mod_pedal is very light on dependencies, requiring only 2 libraries:
-`libx11-dev`
-`libtst-dev`
+
+```
+libx11-dev
+libtst-dev
+```
 
 Once these dependencies have been installed, simply run `make` in the `pc` directory. This will generate the executable `pedald` 
 
@@ -12,4 +15,5 @@ Once these dependencies have been installed, simply run `make` in the `pc` direc
 Run `pedald` with sudo permissions, and provide it with a device to connect to
 
 For example:
-`sudo ./pedald /dev/ttyACM0`
+
+```sudo ./pedald /dev/ttyACM0```
