@@ -126,7 +126,7 @@ int main(int argc, char *argv[])
 	if (states[1] != (data & 0x02))
 	{
 	    states[1] = (data & 0x02);
-	    press_key(XK_Alt_L, data & 0x02);
+	    press_key(XK_Alt_L, states[1]);
 	}
     }
 
