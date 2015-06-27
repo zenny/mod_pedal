@@ -11,6 +11,12 @@ $(EXEC): $(OBJ)
 %.o: %.c
 	$(CC) -c $< -o $@ $(CFLAGS)
 
+install:
+	cp $(EXEC) /usr/bin/$(EXEC)
+
+uninstall:
+	rm /usr/bin/$(EXEC)
+
 clean:
 	touch _dummy.o
 	rm *.o

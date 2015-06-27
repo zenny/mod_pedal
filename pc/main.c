@@ -23,6 +23,7 @@
 #include <syslog.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/file.h>
 #include <unistd.h>
 #include "serial.h"
 #include "x11.h"
@@ -38,6 +39,7 @@ void sig_handler(int signal)
 
 int main(int argc, char *argv[])
 {
+    int lock_fd, lock;
     pid_t pid, sid;
 
     if (argc != 2)
@@ -46,6 +48,17 @@ int main(int argc, char *argv[])
 	printf("Usage: %s device\n", argv[0]);
 
 	return 1;
+    }
+
+    /* Make sure only one instance of the program is running */
+    lock_fd = open("/var/run/pedald.pid", O_CREAT | O_RDWR, 0666);
+    lock = flock(lock_fd, LOCK_EX | LOCK_NB);
+
+    /* Is an instance already running? if so, quit */
+    if (lock != 0 && errno == EWOULDBLOCK)
+    {
+	perror("Could not init");
+	return EXIT_FAILURE;
     }
 
     pid = fork();
