@@ -25,7 +25,7 @@ static Window root_window;
 int init_x11()
 {
     /* Initialise X11 */
-    display = XOpenDisplay(getenv("DISPLAY"));
+    display = XOpenDisplay(0);
     if (display == NULL) return 0;
     
     root_window = DefaultRootWindow(display);
